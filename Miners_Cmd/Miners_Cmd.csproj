@@ -52,10 +52,28 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Instructions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Instructions.Designer.cs">
+      <DependentUpon>Instructions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MenuScreen.Designer.cs">
+      <DependentUpon>MenuScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Instructions.resx">
+      <DependentUpon>Instructions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuScreen.resx">
+      <DependentUpon>MenuScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -65,6 +83,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +97,84 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background dark edge.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cannon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cannonball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cannonfire.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deadheart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Instructions BG.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loadbg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\adamantite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crystal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\diamond.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gold.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iron.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mythril.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\platinum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\damage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\diaBuff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\goldheart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lightning.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\instructButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quitButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scoreButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backarrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
