@@ -28,19 +28,55 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Instructions));
+            this.backButton = new System.Windows.Forms.PictureBox();
+            this.oreLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.backButton)).BeginInit();
             this.SuspendLayout();
+            // 
+            // backButton
+            // 
+            this.backButton.BackColor = System.Drawing.Color.Transparent;
+            this.backButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("backButton.BackgroundImage")));
+            this.backButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.backButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.backButton.Location = new System.Drawing.Point(3, 0);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(219, 152);
+            this.backButton.TabIndex = 0;
+            this.backButton.TabStop = false;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
+            // oreLabel
+            // 
+            this.oreLabel.AutoSize = true;
+            this.oreLabel.BackColor = System.Drawing.Color.Transparent;
+            this.oreLabel.Font = new System.Drawing.Font("Myriad Pro Light", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.oreLabel.ForeColor = System.Drawing.Color.White;
+            this.oreLabel.Location = new System.Drawing.Point(12, 389);
+            this.oreLabel.Name = "oreLabel";
+            this.oreLabel.Size = new System.Drawing.Size(0, 27);
+            this.oreLabel.TabIndex = 17;
             // 
             // Instructions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Miners_Cmd.Properties.Resources.Instructions_BG;
+            this.BackgroundImage = global::Miners_Cmd.Properties.Resources.Instructions_BG2;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.oreLabel);
+            this.Controls.Add(this.backButton);
             this.Name = "Instructions";
-            this.Size = new System.Drawing.Size(1025, 576);
+            this.Size = new System.Drawing.Size(1366, 768);
+            ((System.ComponentModel.ISupportInitialize)(this.backButton)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.PictureBox backButton;
+        private System.Windows.Forms.Label oreLabel;
     }
 }

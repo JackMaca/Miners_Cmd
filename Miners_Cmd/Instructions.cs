@@ -15,6 +15,16 @@ namespace Miners_Cmd
         public Instructions()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            Form f = this.FindForm();
+            MenuScreen ms = new MenuScreen();
+            f.Controls.Add(ms);
+            f.Controls.Remove(this);
+            ms.Location = new Point((this.Width - ms.Width) / 2, (this.Height - ms.Height) / 2);
         }
     }
 }

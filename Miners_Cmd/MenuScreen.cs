@@ -15,6 +15,7 @@ namespace Miners_Cmd
         public MenuScreen()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
         }
         private void quitButton_Click(object sender, EventArgs e)
         {

@@ -26,6 +26,8 @@ namespace Miners_Cmd
             this.Controls.Add(ms);
             ms.Location = new Point((this.Width - ms.Width) / 2, (this.Height - ms.Height) / 2);
             ms.Show();
+
+            this.DoubleBuffered = true;
         }
     }
 }
