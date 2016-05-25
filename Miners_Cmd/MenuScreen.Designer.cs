@@ -49,6 +49,7 @@
             this.playButton.Size = new System.Drawing.Size(245, 93);
             this.playButton.TabIndex = 1;
             this.playButton.TabStop = false;
+            this.playButton.Click += new System.EventHandler(this.playButton_Click);
             // 
             // instructButton
             // 

@@ -62,7 +62,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Miners_Cmd.Properties.Resources.Instructions_BG2;
+            this.BackgroundImage = global::Miners_Cmd.Properties.Resources.Instructions_BGL;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.oreLabel);
             this.Controls.Add(this.backButton);

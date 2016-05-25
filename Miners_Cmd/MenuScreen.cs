@@ -30,5 +30,14 @@ namespace Miners_Cmd
             f.Controls.Remove(this);
             ins.Location = new Point((this.Width - ins.Width) / 2, (this.Height - ins.Height) / 2);
         }
+
+        private void playButton_Click(object sender, EventArgs e)
+        {
+            Form f = this.FindForm();
+            GameScreen gs = new GameScreen();
+            f.Controls.Add(gs);
+            f.Controls.Remove(this);
+            gs.Location = new Point((this.Width - gs.Width) / 2, (this.Height - gs.Height) / 2);
+        }
     }
 }

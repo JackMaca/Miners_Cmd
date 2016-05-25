@@ -273,6 +273,16 @@ namespace Miners_Cmd.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Instructions_BGL {
+            get {
+                object obj = ResourceManager.GetObject("Instructions_BGL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iron {
             get {
                 object obj = ResourceManager.GetObject("iron", resourceCulture);
