@@ -35,6 +35,8 @@
             this.activeEffectBox = new System.Windows.Forms.PictureBox();
             this.gameCountdown = new System.Windows.Forms.Label();
             this.countDownTimer = new System.Windows.Forms.Timer(this.components);
+            this.testTimer = new System.Windows.Forms.Label();
+            this.testLabel2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.activeEffectBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,12 +96,35 @@
             this.countDownTimer.Interval = 1000;
             this.countDownTimer.Tick += new System.EventHandler(this.countDownTimer_Tick);
             // 
+            // testTimer
+            // 
+            this.testTimer.AutoSize = true;
+            this.testTimer.BackColor = System.Drawing.Color.Transparent;
+            this.testTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.testTimer.ForeColor = System.Drawing.Color.White;
+            this.testTimer.Location = new System.Drawing.Point(209, 0);
+            this.testTimer.Name = "testTimer";
+            this.testTimer.Size = new System.Drawing.Size(84, 31);
+            this.testTimer.TabIndex = 4;
+            this.testTimer.Text = "TEST";
+            // 
+            // testLabel2
+            // 
+            this.testLabel2.AutoSize = true;
+            this.testLabel2.Location = new System.Drawing.Point(212, 43);
+            this.testLabel2.Name = "testLabel2";
+            this.testLabel2.Size = new System.Drawing.Size(70, 13);
+            this.testLabel2.TabIndex = 5;
+            this.testLabel2.Text = "oreType Test";
+            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Miners_Cmd.Properties.Resources.gameBG;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.testLabel2);
+            this.Controls.Add(this.testTimer);
             this.Controls.Add(this.gameCountdown);
             this.Controls.Add(this.activeEffectBox);
             this.Controls.Add(this.highscoreLabel);
@@ -123,5 +148,7 @@
         private System.Windows.Forms.PictureBox activeEffectBox;
         private System.Windows.Forms.Label gameCountdown;
         private System.Windows.Forms.Timer countDownTimer;
+        private System.Windows.Forms.Label testTimer;
+        private System.Windows.Forms.Label testLabel2;
     }
 }

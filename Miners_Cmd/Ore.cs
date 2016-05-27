@@ -9,10 +9,9 @@ namespace Miners_Cmd
 {
     class Ore
     {
-        public string oreType;
-        public int x, y, size, speed, health, score;
+        public int oreType, x, y, size, speed, health, score;
 
-        public Ore(string _oreType, int _x, int _y, int _size, int _speed, int _health, int _score)
+        public Ore(int _oreType, int _x, int _y, int _size, int _speed, int _health, int _score)
         {
             oreType = _oreType;
             x = _x;
