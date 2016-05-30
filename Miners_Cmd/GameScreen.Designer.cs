@@ -111,7 +111,7 @@
             // testLabel2
             // 
             this.testLabel2.AutoSize = true;
-            this.testLabel2.Location = new System.Drawing.Point(212, 43);
+            this.testLabel2.Location = new System.Drawing.Point(212, 42);
             this.testLabel2.Name = "testLabel2";
             this.testLabel2.Size = new System.Drawing.Size(70, 13);
             this.testLabel2.TabIndex = 5;

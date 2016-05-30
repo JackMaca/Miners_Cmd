@@ -46,7 +46,6 @@ namespace Miners_Cmd
         int fireMode = 0;
 
         Player p;
-        Ore o;
         //damage variable for bullet
         int dmg = 1;
 
@@ -58,6 +57,9 @@ namespace Miners_Cmd
 
         //int to determine new Ore
         int newOreType;
+
+        //player health
+        int health = 6;
 
         //buff actives
         bool diamondBuff = false;
@@ -388,8 +390,26 @@ namespace Miners_Cmd
             {
                 o.y += o.speed;
             }
+            //remove ores that fall off the screen
+            foreach (Ore o in ores)
+            {
+                if (o.y >= 800)
+                {
+                    ores.RemoveAt(0);
+                }
+            }
+            //remove bullets that shoot off the screen
+            foreach (Bullet b in bullets)
+            {
+                if (b.y <= -30)
+                {
+                    //**remove 1st bullet (highest bullet should be 1st bullet)
+                    bullets.RemoveAt(0);                    
+                }
+            }
+            //bullet collision
             //refresh runs paint method **not working, instead its slowing the timer tickrate
-            //Refresh();
+            Refresh();
         }
 
         //int for countdown
@@ -426,8 +446,7 @@ namespace Miners_Cmd
             }
 
             //draw all ores
-            int i2 = 0;
-            for (i2 = 0; i2 < ores.Count; i++)
+            foreach (Ore o in ores)
             {
                 e.Graphics.DrawImage(oreImg[newOreType], o.x, o.y, 75, 75);
             }
