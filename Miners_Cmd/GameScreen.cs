@@ -14,7 +14,7 @@ namespace Miners_Cmd
     public partial class GameScreen : UserControl
     {
         //determines if keys are pressed
-        Boolean ADown, DDown, fire;
+        Boolean ADown, DDown, fire, pDown;
 
         //create graphic objects
         SolidBrush drawBrush = new SolidBrush(Color.Black);
@@ -41,16 +41,17 @@ namespace Miners_Cmd
         static Image ore5 = Properties.Resources.adamantite;
         static Image ore6 = Properties.Resources.crystal;
         static Image ore7 = Properties.Resources.diamond;
-        static Image[] oreImg = {ore0, ore1, ore2, ore3, ore4, ore5, ore6, ore7};
+        static Image ore8 = Properties.Resources.goldheart;
+        static Image ore9 = Properties.Resources.lightning;
+        static Image ore10 = Properties.Resources.damage;
+        static Image ore11 = Properties.Resources.diaBuff;
+        static Image[] oreImg = {ore0, ore1, ore2, ore3, ore4, ore5, ore6, ore7, ore8, ore9, ore10, ore11};
         //changes images for firing
         int fireMode = 0;
 
         Player p;
         //damage variable for bullet
         int dmg = 1;
-
-        //movement speed variable
-        int plSpeed = 4;
 
         //timer to spawn a new ore.
         int oreTime = 0;
@@ -61,10 +62,20 @@ namespace Miners_Cmd
         //player health
         int health = 6;
 
-        //buff actives
+        //buff active
         bool diamondBuff = false;
-        bool speedBuff = false;
-        bool dmgBuff = false;
+
+        //boolean for allowing bullets to be fired
+        bool fireAccept = true;
+
+        //score Variable
+        public int score = 0;
+
+        //variable for the length that buffs last
+        int buffTime = 0;
+
+        //integers for displaying ore counts
+        public int IrockScore, IironScore, IgoldScore, ImythrilScore, IplatinumScore, IadamantiteScore, IcrystalScore, IdiamondScore = 0;
 
         public GameScreen()
         {
@@ -75,7 +86,7 @@ namespace Miners_Cmd
         private void GameScreen_Load(object sender, EventArgs e)
         {
             //set initial position
-            p = new Player(638, 693, 75, plSpeed, 0, player);
+            p = new Player(638, 693, 75, 10, 0, player);
             //enable countdown
             countDownTimer.Enabled = true;
         }
@@ -94,11 +105,13 @@ namespace Miners_Cmd
                 case Keys.Space:
                     fire = true;
                     break;
+                case Keys.P:
+                    pDown = true;
+                    break;
                 default:
                     break;
             }
-        }
-
+        }        
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
             //check to see if a key has been released and set its KeyDown value to false if it has
@@ -113,6 +126,9 @@ namespace Miners_Cmd
                 case Keys.Space:
                     fire = false;
                     break;
+                case Keys.P:
+                    pDown = false;
+                    break;
                 default:
                     break;
             }
@@ -120,53 +136,86 @@ namespace Miners_Cmd
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            //test to see if timer is working properly(temporary)
-            testTimer.Text = oreTime.ToString();
-
+            //display score
+            scoreLabel.Text = score.ToString();
             #region Key Booleans
             ////checks to see if any keys have been pressed and adjusts the X or Y value
             ////for the player appropriately
+
+            //pause menu
+            if (pDown == true)
+            {
+
+            }
+
             if (ADown == true)
             {
-                p.move(p, 0);
-                direction = 0;
+                if (p.x > 206)
+                {
+                    p.move(p, 0);
+                    direction = 0;
+                }
+                else
+                {
+
+                }
             }
             else if (DDown == true)
             {
-                p.move(p, 1);
-                direction = 1;
+                if (p.x < 1089)
+                {
+                    p.move(p, 1);
+                    direction = 1;
+                }
+                else
+                {
+
+                }
             }
             if (fire == true)
             {
-                //max 3 bullets at once
-                if (bullets.Count <= 2)
+                if (fireAccept == true)
                 {
-                    Bullet b = new Bullet(p.x + 37, p.y + 37, 25, 3, dmg);
-                    bullets.Add(b);
+                    //max 3 bullets at once
+                    if (bullets.Count <= 2)
+                    {
+                        Bullet b = new Bullet(p.x + 19, p.y + 5, 25, 15);
+                        bullets.Add(b);
+                    }
+                    else
+                    {
+
+                    }
                 }
                 else
                 {
 
                 }
 
+                fireAccept = false;
                 fireMode = 1;
             }
             else if (fire == false)
             {
+                fireAccept = true;
                 fireMode = 0;
             }
                 #endregion
                 oreTime++;            
             //after a time, sends out a new ore / powerup
-            if (oreTime == 80)
+            if (oreTime == 40)
             {
                 #region random Ore
-                int randType, randX, hp, oreScore;            
+                int randType, randX, hp, oreScore, randPowerX, randPowerType, powerChance;            
                 // create a random number generator
                 Random randNum = new Random();
                 randType = randNum.Next(1, 101);
                 randX = randNum.Next(206, 1089);
-                
+
+                //powerup random
+                powerChance = randNum.Next(1, 101);
+                randPowerX = randNum.Next(206, 1089);
+                randPowerType = randNum.Next(1, 101);
                 /// ORE GUIDE
                 /// 0 = rock
                 /// 1 = iron
@@ -177,7 +226,57 @@ namespace Miners_Cmd
                 /// 6 = crystal
                 /// 7 = diamond
 
-                //if diamond buff is false, give basic chance for ores
+                ///POWERUP GUIDE 
+                ///8 = goldheart
+                ///9 = speed
+                ///10 = damage
+                ///11 = diamond buff
+
+                //5% chance for a buff every 40 ticks, 25% chance per buff
+                if (powerChance >= 95)
+                {
+                    if (randPowerType <= 25)
+                    {                                                
+                        newOreType = 8;
+                        hp = 1;
+                        oreScore = 1;
+
+                        Ore o = new Ore(newOreType, randPowerX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
+                    }
+                    else if (randPowerType >= 26 && randPowerType <= 50)
+                    {                                                
+                        newOreType = 9;
+                        hp = 1;
+                        oreScore = 1;
+
+                        Ore o = new Ore(newOreType, randPowerX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
+                    }
+                    else if (randPowerType >= 51 && randPowerType <= 75)
+                    {                                                
+                        newOreType = 10;
+                        hp = 1;
+                        oreScore = 1;
+
+                        Ore o = new Ore(newOreType, randPowerX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
+                    }
+                    else
+                    {                                              
+                        newOreType = 11;
+                        hp = 1;
+                        oreScore = 1;
+
+                        Ore o = new Ore(newOreType, randPowerX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
+                    }
+                }
+                else
+                {
+
+                }
+                //if diamond buff is false, give basic chance for ores                
                 if (diamondBuff == false)
                 {
                     if (randType <= 25)
@@ -187,10 +286,8 @@ namespace Miners_Cmd
                         hp = 1;
                         oreScore = 1;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "rock";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 26 && randType <= 50)
                     {
@@ -199,10 +296,8 @@ namespace Miners_Cmd
                         hp = 1;
                         oreScore = 3;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "iron";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 51 && randType <= 65)
                     {
@@ -211,10 +306,8 @@ namespace Miners_Cmd
                         hp = 1;
                         oreScore = 5;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "gold";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 66 && randType <= 73)
                     {
@@ -223,10 +316,8 @@ namespace Miners_Cmd
                         hp = 2;
                         oreScore = 8;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "mythril";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 74 && randType <= 80)
                     {
@@ -235,10 +326,8 @@ namespace Miners_Cmd
                         hp = 2;
                         oreScore = 12;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "platinum";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 81 && randType <= 85)
                     {
@@ -247,10 +336,8 @@ namespace Miners_Cmd
                         hp = 3;
                         oreScore = 15;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-                        //TEST ORE
-                        testLabel2.Text = "adamantite";
-
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 86 && randType <= 95)
                     {
@@ -259,10 +346,8 @@ namespace Miners_Cmd
                         hp = 1;
                         oreScore = 20;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "crystal";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 96)
                     {
@@ -271,10 +356,8 @@ namespace Miners_Cmd
                         hp = 2;
                         oreScore = 35;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "diamond";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     oreTime = 0;
                 }
@@ -288,10 +371,8 @@ namespace Miners_Cmd
                         hp = 1;
                         oreScore = 1;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "rock";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 6 && randType <= 10)
                     {
@@ -300,22 +381,18 @@ namespace Miners_Cmd
                         hp = 1;
                         oreScore = 3;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "iron";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 11 && randType <= 14)
                     {
                         //4% chance for gold
                         newOreType = 2;
                         hp = 1;
-                        oreScore = 5;
-
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "gold";
+                        oreScore = 5;   
+                                            
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 15 && randType <= 17)
                     {
@@ -324,10 +401,8 @@ namespace Miners_Cmd
                         hp = 2;
                         oreScore = 8;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "mythril";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 18 && randType <= 19)
                     {
@@ -336,10 +411,8 @@ namespace Miners_Cmd
                         hp = 2;
                         oreScore = 12;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "platinum";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType == 20)
                     {
@@ -348,10 +421,8 @@ namespace Miners_Cmd
                         hp = 3;
                         oreScore = 15;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "adamantite";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 21 && randType <= 24)
                     {
@@ -360,10 +431,8 @@ namespace Miners_Cmd
                         hp = 1;
                         oreScore = 20;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "crystal";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 8, hp, oreScore);
+                        ores.Add(o);
                     }
                     else if (randType >= 25)
                     {
@@ -372,10 +441,8 @@ namespace Miners_Cmd
                         hp = 2;
                         oreScore = 35;
 
-                        Ore o = new Ore(newOreType, randX, -80, 70, 2, hp, oreScore);
-
-                        //TEST ORE
-                        testLabel2.Text = "diamond";
+                        Ore o = new Ore(newOreType, randX, -80, 70, 3, hp, oreScore);
+                        ores.Add(o);
                     }
                     oreTime = 0;
                 }
@@ -395,7 +462,175 @@ namespace Miners_Cmd
             {
                 if (o.y >= 800)
                 {
-                    ores.RemoveAt(0);
+                    //only lose health if its an ore, not a powerup
+                    if (o.oreType <= 7)
+                    {
+                        health--;
+                    }
+                    else if (o.oreType >= 8)
+                    {
+                        //no health lost
+                    }
+                    ores.RemoveAt(Convert.ToInt16(ores.IndexOf(o)));
+                    break;
+                }
+                else
+                {
+
+                }
+            }
+
+            //bufftime ends, buffs turn off
+            if (buffTime == 500)
+            {
+                diamondBuff = false;
+                dmg = 1;
+                p.speed = 10;
+                buffTimer.Enabled = false;
+                buffTime = 0;
+                activeEffectBox.Visible = false;
+            }
+            //COLLISION between bullets and ores
+            foreach (Ore o in ores)
+            {
+                bool oreRemove = false;
+                foreach (Bullet bl in bullets)
+                {
+                    if (o.bulletCollision(o, bl) == true)
+                    {
+                        //remove bullets that collide
+                        bullets.RemoveAt(Convert.ToInt16(bullets.IndexOf(bl)));
+                        //if ore will die from this hit
+                        if (o.health <= 1)
+                        {                           
+                            #region oreScores
+                            //different scores based on ore type
+                            if (o.oreType == 0)
+                            {
+                                //rock +1
+                                score++;
+                                IrockScore++;
+                            }
+                            else if (o.oreType == 1)
+                            {
+                                //iron +3
+                                score = score + 3;
+                                IironScore++;
+                            }
+                            else if (o.oreType == 2)
+                            {
+                                //gold + 5
+                                score = score + 5;
+                                IgoldScore++;
+                            }
+                            else if (o.oreType == 3)
+                            {
+                                //mythril + 8
+                                score = score + 8;
+                                ImythrilScore++;
+                            }
+                            else if (o.oreType == 4)
+                            {
+                                //platinum + 12
+                                score = score + 12;
+                                IplatinumScore++;
+                            }
+                            else if (o.oreType == 5)
+                            {
+                                //adamantite + 15
+                                score = score + 12;
+                                IadamantiteScore++;
+                            }
+                            else if (o.oreType == 6)
+                            {
+                                //crystal + 20
+                                score = score + 20;
+                                IcrystalScore++;
+                            }
+                            else if (o.oreType == 7)
+                            {
+                                //diamond + 35
+                                score = score + 35;
+                                IdiamondScore++;
+                            }
+                            else if (o.oreType == 8)
+                            {
+                                //gold heart
+                                health++;
+
+                                //turn off active effects
+                                dmg = 1;
+                                diamondBuff = false;
+                                p.speed = 10;
+
+                                activeEffectBox.BackgroundImage = Properties.Resources.goldheart;
+                                activeEffectBox.Visible = true;
+                            }
+                            else if (o.oreType == 9)
+                            {
+
+                                //speed increased
+                                p.speed = 20;
+                                //reset other stats
+                                dmg = 1;
+                                diamondBuff = false;
+
+                                activeEffectBox.BackgroundImage = Properties.Resources.lightning;
+                                activeEffectBox.Visible = true;
+
+                                buffTimer.Enabled = true;
+                                buffTime = 0;
+                            }
+                            else if (o.oreType == 10)
+                            {                                
+                                //damage increased
+                                dmg = 3;
+
+                                //reset other stats
+                                p.speed = 10;
+                                diamondBuff = false;
+
+                                activeEffectBox.BackgroundImage = Properties.Resources.damage;
+                                activeEffectBox.Visible = true;
+
+                                buffTimer.Enabled = true;
+                                buffTime = 0;
+                            }
+                            else if (o.oreType == 11)
+                            {                                
+                                //diamond rate increased
+                                diamondBuff = true;
+
+                                //reset other stats
+                                p.speed = 10;
+                                dmg = 1;
+                                activeEffectBox.BackgroundImage = Properties.Resources.diaBuff;
+                                activeEffectBox.Visible = true;
+
+                                buffTimer.Enabled = true;
+                                buffTime = 0;
+                            }
+                            #endregion                                   
+                            oreRemove = true;
+                            break;
+                        }
+                        //if ore has more than 1 hp left
+                        else
+                        {
+                            //subtract damage from ore
+                            o.health = o.health - dmg;
+                            break;
+                        }                       
+                    }
+                    else
+                    {
+
+                    }
+                }
+                if (oreRemove == true)
+                {
+                    ores.RemoveAt(Convert.ToInt16(ores.IndexOf(o)));
+                    break;
                 }
             }
             //remove bullets that shoot off the screen
@@ -404,16 +639,53 @@ namespace Miners_Cmd
                 if (b.y <= -30)
                 {
                     //**remove 1st bullet (highest bullet should be 1st bullet)
-                    bullets.RemoveAt(0);                    
+                    bullets.RemoveAt(Convert.ToInt16(bullets.IndexOf(b)));
+                    break;                    
+                }
+                else
+                {
+
                 }
             }
-            //bullet collision
-            //refresh runs paint method **not working, instead its slowing the timer tickrate
+            // max health at 6, if it exceeds 6 from a powerup, will return to 6
+            if (health >= 6)
+            {
+                health = 6;
+            }
+            //run GameOver if health reaches 0
+            if (health == 0)
+            {
+                Form f = this.FindForm();
+                GameOver go = new GameOver();
+                f.Controls.Remove(this);
+                f.Controls.Add(go);                
+                go.Location = new Point((this.Width - go.Width) / 2, (this.Height - go.Height) / 2);
+            }
+
+            //display ore counts on the screen
+            rockScore.Text = IrockScore.ToString();
+            ironScore.Text = IironScore.ToString();
+            goldScore.Text = IgoldScore.ToString();
+            mythrilScore.Text = ImythrilScore.ToString();
+            platinumScore.Text = IplatinumScore.ToString();
+            adamantiteScore.Text = IadamantiteScore.ToString();
+            crystalScore.Text = IcrystalScore.ToString();
+            diamondScore.Text = IdiamondScore.ToString();
+
+            //timer displays time remaining on buffs
+            activeTimer.Text = buffTime.ToString() + "/500";
+            //refresh runs paint method
             Refresh();
         }
 
         //int for countdown
         int cd = 6;
+
+        private void buffTimer_Tick(object sender, EventArgs e)
+        {
+            buffTime++;
+        }
+
         private void countDownTimer_Tick(object sender, EventArgs e)
         {
             //countdown until game starts    
@@ -448,7 +720,53 @@ namespace Miners_Cmd
             //draw all ores
             foreach (Ore o in ores)
             {
-                e.Graphics.DrawImage(oreImg[newOreType], o.x, o.y, 75, 75);
+                e.Graphics.DrawImage(oreImg[o.oreType], o.x, o.y, 70, 70);
+            }
+
+            //display lost health
+            if (health == 6)
+            {
+                dh1.Visible = false;
+            }
+            else if (health == 5)
+            {
+                dh1.Visible = true;
+                dh2.Visible = false;
+                dh3.Visible = false;
+                dh4.Visible = false;
+                dh5.Visible = false;
+            }
+            else if (health == 4)
+            {
+                dh1.Visible = true;
+                dh2.Visible = true;
+                dh3.Visible = false;
+                dh4.Visible = false;
+                dh5.Visible = false;
+            }
+            else if (health == 3)
+            {
+                dh1.Visible = true;
+                dh2.Visible = true;
+                dh3.Visible = true;
+                dh4.Visible = false;
+                dh5.Visible = false;
+            }
+            else if (health == 2)
+            {
+                dh1.Visible = true;
+                dh2.Visible = true;
+                dh3.Visible = true;
+                dh4.Visible = true;
+                dh5.Visible = false;
+            }
+            else if (health == 1)
+            {
+                dh1.Visible = true;
+                dh2.Visible = true;
+                dh3.Visible = true;
+                dh4.Visible = true;
+                dh5.Visible = true;
             }
         }
     }

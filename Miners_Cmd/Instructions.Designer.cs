@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Instructions));
             this.backButton = new System.Windows.Forms.PictureBox();
             this.oreLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.backButton)).BeginInit();
@@ -37,12 +36,12 @@
             // backButton
             // 
             this.backButton.BackColor = System.Drawing.Color.Transparent;
-            this.backButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("backButton.BackgroundImage")));
+            this.backButton.BackgroundImage = global::Miners_Cmd.Properties.Resources.backButton;
             this.backButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.backButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.backButton.Location = new System.Drawing.Point(3, 0);
+            this.backButton.Location = new System.Drawing.Point(3, 17);
             this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(219, 152);
+            this.backButton.Size = new System.Drawing.Size(249, 100);
             this.backButton.TabIndex = 0;
             this.backButton.TabStop = false;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
