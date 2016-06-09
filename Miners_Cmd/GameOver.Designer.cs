@@ -49,6 +49,7 @@
             this.quitButton.BackColor = System.Drawing.Color.Transparent;
             this.quitButton.BackgroundImage = global::Miners_Cmd.Properties.Resources.quitButton;
             this.quitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.quitButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.quitButton.Location = new System.Drawing.Point(751, 593);
             this.quitButton.Name = "quitButton";
             this.quitButton.Size = new System.Drawing.Size(301, 107);
@@ -61,6 +62,7 @@
             this.backButton.BackColor = System.Drawing.Color.Transparent;
             this.backButton.BackgroundImage = global::Miners_Cmd.Properties.Resources.backButton;
             this.backButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.backButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.backButton.Location = new System.Drawing.Point(319, 593);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(301, 107);

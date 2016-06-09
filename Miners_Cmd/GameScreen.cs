@@ -74,9 +74,15 @@ namespace Miners_Cmd
         //variable for the length that buffs last
         int buffTime = 0;
 
+        //variable for the speed at which ores spawn. Lower value = faster.
+        int gameSpeed = 40;
+        int gameSpeedDrop = 0;
+
         //integers for displaying ore counts
         public int IrockScore, IironScore, IgoldScore, ImythrilScore, IplatinumScore, IadamantiteScore, IcrystalScore, IdiamondScore = 0;
-
+       
+        //restriction on pause length
+        int pauseLimit = 0;
         public GameScreen()
         {
             InitializeComponent();
@@ -140,13 +146,7 @@ namespace Miners_Cmd
             scoreLabel.Text = score.ToString();
             #region Key Booleans
             ////checks to see if any keys have been pressed and adjusts the X or Y value
-            ////for the player appropriately
-
-            //pause menu
-            if (pDown == true)
-            {
-
-            }
+            ////for the player appropriately            
 
             if (ADown == true)
             {
@@ -195,6 +195,15 @@ namespace Miners_Cmd
                 fireAccept = false;
                 fireMode = 1;
             }
+
+            //pause menu
+            if (pDown == true)
+            {
+                pauseLabel.Visible = true;
+                pauseTimer.Enabled = true;               
+                gameTimer.Enabled = false;
+                Thread.Sleep(250);
+            }
             else if (fire == false)
             {
                 fireAccept = true;
@@ -203,7 +212,7 @@ namespace Miners_Cmd
                 #endregion
                 oreTime++;            
             //after a time, sends out a new ore / powerup
-            if (oreTime == 40)
+            if (oreTime == gameSpeed)
             {
                 #region random Ore
                 int randType, randX, hp, oreScore, randPowerX, randPowerType, powerChance;            
@@ -232,7 +241,7 @@ namespace Miners_Cmd
                 ///10 = damage
                 ///11 = diamond buff
 
-                //5% chance for a buff every 40 ticks, 25% chance per buff
+                //5% chance for a buff every (gameSpeed) ticks, 25% chance per buff
                 if (powerChance >= 95)
                 {
                     if (randPowerType <= 25)
@@ -445,8 +454,15 @@ namespace Miners_Cmd
                         ores.Add(o);
                     }
                     oreTime = 0;
+                    gameSpeedDrop++;
                 }
                 #endregion               
+            }
+            //every 10 ores spawn, increase the speed. (exponential growth)
+            if (gameSpeedDrop == 10)
+            {
+                gameSpeed--;
+                gameSpeedDrop = 0;
             }
             //move bullets and ores in their directions.
             foreach (Bullet b in bullets)
@@ -655,13 +671,15 @@ namespace Miners_Cmd
             //run GameOver if health reaches 0
             if (health == 0)
             {
-                Form f = this.FindForm();
-                GameOver go = new GameOver();
-                f.Controls.Remove(this);
-                f.Controls.Add(go);                
-                go.Location = new Point((this.Width - go.Width) / 2, (this.Height - go.Height) / 2);
+                youLostButton.Visible = true;
+                gameTimer.Enabled = false;
             }
 
+            //lower pause limit to allow more pause time for more play time.
+            if (pauseLimit >= 1)
+            {
+                pauseLimit--;
+            }
             //display ore counts on the screen
             rockScore.Text = IrockScore.ToString();
             ironScore.Text = IironScore.ToString();
@@ -676,6 +694,29 @@ namespace Miners_Cmd
             activeTimer.Text = buffTime.ToString() + "/500";
             //refresh runs paint method
             Refresh();
+        }
+
+        //pauseTimer set to be able to set pause restrictions if pausing is abused.
+        private void pauseTimer_Tick(object sender, EventArgs e)
+        {           
+            if (pDown == true)
+            {
+                pauseLabel.Visible = false;
+                gameTimer.Enabled = true;
+                pauseTimer.Enabled = false;                
+                Thread.Sleep(250);
+            }
+
+            //uncomment code below to set a restriction on how long you can pause
+
+            //pauseLimit++;
+            //if (pauseLimit == 60)
+            //{
+            //    pauseLabel.Visible = false;
+            //    gameTimer.Enabled = true;
+            //    pauseTimer.Enabled = false;
+            //    Thread.Sleep(250);
+            //}
         }
 
         //int for countdown
@@ -702,6 +743,15 @@ namespace Miners_Cmd
             {
                 gameTimer.Enabled = false;
             }
+        }
+
+        private void youLostButton_Click(object sender, EventArgs e)
+        {
+            Form f = this.FindForm();
+            GameOver go = new GameOver();
+            f.Controls.Add(go);
+            f.Controls.Remove(this);
+            go.Location = new Point((this.Width - go.Width) / 2, (this.Height - go.Height) / 2);
         }
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)

@@ -343,6 +343,16 @@ namespace Miners_Cmd.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pKey {
+            get {
+                object obj = ResourceManager.GetObject("pKey", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap platinum {
             get {
                 object obj = ResourceManager.GetObject("platinum", resourceCulture);

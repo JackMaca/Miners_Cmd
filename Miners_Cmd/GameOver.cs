@@ -18,8 +18,9 @@ namespace Miners_Cmd
 
             //fixes flickering
             DoubleBuffered = true;
-            //display final score
             GameScreen gs = new GameScreen();
+
+            ////display final score
             scoreLabel.Text = "FINAL SCORE:" + gs.score.ToString();
 
             //display ore counts
