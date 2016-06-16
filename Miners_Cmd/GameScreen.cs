@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using WMPLib;
+using System.Media;
+
 
 namespace Miners_Cmd
 {
     public partial class GameScreen : UserControl
-    {
+    {      
         //determines if keys are pressed
         Boolean ADown, DDown, fire, pDown;
 
@@ -69,7 +72,7 @@ namespace Miners_Cmd
         bool fireAccept = true;
 
         //score Variable
-        public int score = 0;
+        public static int score = 0;
 
         //variable for the length that buffs last
         int buffTime = 0;
@@ -79,16 +82,17 @@ namespace Miners_Cmd
         int gameSpeedDrop = 0;
 
         //integers for displaying ore counts
-        public int IrockScore, IironScore, IgoldScore, ImythrilScore, IplatinumScore, IadamantiteScore, IcrystalScore, IdiamondScore = 0;
+        public static int IrockScore, IironScore, IgoldScore, ImythrilScore, IplatinumScore, IadamantiteScore, IcrystalScore, IdiamondScore = 0;
        
         //restriction on pause length
-        int pauseLimit = 0;
+        int pauseLimit = 0;       
+
         public GameScreen()
         {
             InitializeComponent();
-            this.DoubleBuffered = true;
+            this.DoubleBuffered = true;          
         }
-
+        
         private void GameScreen_Load(object sender, EventArgs e)
         {
             //set initial position
@@ -142,6 +146,16 @@ namespace Miners_Cmd
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            #region sounds
+            ////cannonfire
+            //WindowsMediaPlayer cannonSound = new WindowsMediaPlayer();
+            //cannonSound.URL = "cannonSound.mp3";
+
+            ////cannon click
+            //WindowsMediaPlayer dryFire = new WindowsMediaPlayer();
+            //dryFire.URL = "dryFire.mp3";
+            #endregion
+                
             //display score
             scoreLabel.Text = score.ToString();
             #region Key Booleans
@@ -174,18 +188,19 @@ namespace Miners_Cmd
             }
             if (fire == true)
             {
+                //fireAccept stops automatic firing. Each shot needs it's own user input
                 if (fireAccept == true)
                 {
                     //max 3 bullets at once
                     if (bullets.Count <= 2)
                     {
+                        
                         Bullet b = new Bullet(p.x + 19, p.y + 5, 25, 15);
-                        bullets.Add(b);
+                        bullets.Add(b);                        
                     }
                     else
-                    {
-
-                    }
+                    {                       
+                    }                    
                 }
                 else
                 {
@@ -671,7 +686,11 @@ namespace Miners_Cmd
             //run GameOver if health reaches 0
             if (health == 0)
             {
-                youLostButton.Visible = true;
+                Form f = this.FindForm();
+                GameOver go = new GameOver();
+                f.Controls.Add(go);
+                go.BringToFront();
+                go.Location = new Point((this.Width - go.Width) / 2, (this.Height - go.Height) / 2);
                 gameTimer.Enabled = false;
             }
 
@@ -743,15 +762,6 @@ namespace Miners_Cmd
             {
                 gameTimer.Enabled = false;
             }
-        }
-
-        private void youLostButton_Click(object sender, EventArgs e)
-        {
-            Form f = this.FindForm();
-            GameOver go = new GameOver();
-            f.Controls.Add(go);
-            f.Controls.Remove(this);
-            go.Location = new Point((this.Width - go.Width) / 2, (this.Height - go.Height) / 2);
         }
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)

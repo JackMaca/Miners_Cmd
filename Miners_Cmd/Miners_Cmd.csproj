@@ -230,6 +230,56 @@
   <ItemGroup>
     <None Include="Resources\pKey.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\-1hp.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgmusic.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\collide.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fire_bow_sound-mike-koenig.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gameover.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\highscore.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\powerup.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cannonfire.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dryFire.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cannon.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cannonSound.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dryFire.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\bgmusic.mp3" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

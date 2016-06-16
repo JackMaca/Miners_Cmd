@@ -50,7 +50,6 @@
             this.adamantiteScore = new System.Windows.Forms.Label();
             this.crystalScore = new System.Windows.Forms.Label();
             this.diamondScore = new System.Windows.Forms.Label();
-            this.youLostButton = new System.Windows.Forms.Button();
             this.pauseTimer = new System.Windows.Forms.Timer(this.components);
             this.pauseLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.activeEffectBox)).BeginInit();
@@ -291,20 +290,6 @@
             this.diamondScore.TabIndex = 19;
             this.diamondScore.Text = "0";
             // 
-            // youLostButton
-            // 
-            this.youLostButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.youLostButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.youLostButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.youLostButton.Location = new System.Drawing.Point(609, 102);
-            this.youLostButton.Name = "youLostButton";
-            this.youLostButton.Size = new System.Drawing.Size(115, 98);
-            this.youLostButton.TabIndex = 20;
-            this.youLostButton.Text = "You Suck";
-            this.youLostButton.UseVisualStyleBackColor = true;
-            this.youLostButton.Visible = false;
-            this.youLostButton.Click += new System.EventHandler(this.youLostButton_Click);
-            // 
             // pauseTimer
             // 
             this.pauseTimer.Tick += new System.EventHandler(this.pauseTimer_Tick);
@@ -329,7 +314,6 @@
             this.BackgroundImage = global::Miners_Cmd.Properties.Resources.gameBG;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.pauseLabel);
-            this.Controls.Add(this.youLostButton);
             this.Controls.Add(this.diamondScore);
             this.Controls.Add(this.crystalScore);
             this.Controls.Add(this.adamantiteScore);
@@ -388,7 +372,6 @@
         private System.Windows.Forms.Label crystalScore;
         private System.Windows.Forms.Label rockScore;
         private System.Windows.Forms.Label diamondScore;
-        private System.Windows.Forms.Button youLostButton;
         private System.Windows.Forms.Timer pauseTimer;
         private System.Windows.Forms.Label pauseLabel;
     }

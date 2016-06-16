@@ -7,23 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WMPLib;
+using System.Media;
 
 namespace Miners_Cmd
 {
     public partial class MenuScreen : UserControl
-    {
+    {      
         public MenuScreen()
         {
-            InitializeComponent();
+            InitializeComponent();                         
             this.DoubleBuffered = true;
         }
         private void quitButton_Click(object sender, EventArgs e)
         {
+            //click sound for buttons
+            WindowsMediaPlayer click = new WindowsMediaPlayer();
+            click.URL = "click.wav";
+            click.controls.play();
+
             ((Form)this.TopLevelControl).Close();
         }
 
         private void instructButton_Click(object sender, EventArgs e)
         {
+            //click sound for buttons
+            WindowsMediaPlayer click = new WindowsMediaPlayer();
+            click.URL = "click.wav";
+            click.controls.play();
+
             Form f = this.FindForm();
             Instructions ins = new Instructions();
             f.Controls.Add(ins);
@@ -33,6 +45,11 @@ namespace Miners_Cmd
 
         private void playButton_Click(object sender, EventArgs e)
         {
+            //click sound for buttons
+            WindowsMediaPlayer click = new WindowsMediaPlayer();
+            click.URL = "click.wav";
+            click.controls.play();
+
             Form f = this.FindForm();
             GameScreen gs = new GameScreen();
             f.Controls.Add(gs);

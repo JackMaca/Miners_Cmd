@@ -7,16 +7,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
+using WMPLib;
+using System.Media;
 
 namespace Miners_Cmd
 {
     public partial class Form1 : Form
     {
+        //new thread for background music
+        Thread backMusicThread;
+        WindowsMediaPlayer mp3Player;
         public Form1()
         {
             InitializeComponent();
+
+            backMusicThread = new Thread(BackgroundMusic);
+            backMusicThread.Start();
+            KeyPreview = true;
         }
 
+        public void BackgroundMusic()
+        {
+            int randType;
+            Random randNum = new Random();
+            randType = randNum.Next(1, 101);
+
+            //10% chance to play different song
+            if (randType <= 10)
+            {
+                mp3Player.URL = "xtreme.mp3";
+            }
+            else
+            {
+                mp3Player.URL = "menuMusic.mp3";
+            }            
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             InitializeComponent();
