@@ -85,12 +85,17 @@ namespace Miners_Cmd
         public static int IrockScore, IironScore, IgoldScore, ImythrilScore, IplatinumScore, IadamantiteScore, IcrystalScore, IdiamondScore = 0;
        
         //restriction on pause length
-        int pauseLimit = 0;       
+        int pauseLimit = 0;
+        
+        //mp3 Players for sounds
+        WindowsMediaPlayer cannonPlayer;
+        WindowsMediaPlayer dryPlayer;
+        WindowsMediaPlayer hpDown;
 
         public GameScreen()
         {
             InitializeComponent();
-            this.DoubleBuffered = true;          
+            this.DoubleBuffered = true;
         }
         
         private void GameScreen_Load(object sender, EventArgs e)
@@ -147,20 +152,16 @@ namespace Miners_Cmd
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             #region sounds
-            ////cannonfire
-            //WindowsMediaPlayer cannonSound = new WindowsMediaPlayer();
-            //cannonSound.URL = "cannonSound.mp3";
 
-            ////cannon click
-            //WindowsMediaPlayer dryFire = new WindowsMediaPlayer();
-            //dryFire.URL = "dryFire.mp3";
+           
             #endregion
-                
+
             //display score
             scoreLabel.Text = score.ToString();
+
             #region Key Booleans
-            ////checks to see if any keys have been pressed and adjusts the X or Y value
-            ////for the player appropriately            
+            //checks to see if any keys have been pressed and adjusts the X or Y value
+            //for the player appropriately            
 
             if (ADown == true)
             {
@@ -196,10 +197,17 @@ namespace Miners_Cmd
                     {
                         
                         Bullet b = new Bullet(p.x + 19, p.y + 5, 25, 15);
-                        bullets.Add(b);                        
+                        bullets.Add(b);
+
+                        //cannonfire
+                        cannonPlayer = new WindowsMediaPlayer();
+                        cannonPlayer.URL = "cannonSound.mp3";
                     }
                     else
-                    {                       
+                    {
+                        //cannon click
+                        dryPlayer = new WindowsMediaPlayer();
+                        dryPlayer.URL = "dryFire.mp3";
                     }                    
                 }
                 else
@@ -497,6 +505,10 @@ namespace Miners_Cmd
                     if (o.oreType <= 7)
                     {
                         health--;
+
+                        //health lost sound
+                        hpDown = new WindowsMediaPlayer();
+                        hpDown.URL = "cannonSound.mp3";
                     }
                     else if (o.oreType >= 8)
                     {

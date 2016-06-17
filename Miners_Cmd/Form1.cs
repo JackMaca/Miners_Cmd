@@ -36,12 +36,14 @@ namespace Miners_Cmd
             //10% chance to play different song
             if (randType <= 10)
             {
-                mp3Player.URL = "xtreme.mp3";
+                mp3Player = new WindowsMediaPlayer();
+                mp3Player.URL = "allstar.mp3";
             }
             else
             {
+                mp3Player = new WindowsMediaPlayer();
                 mp3Player.URL = "menuMusic.mp3";
-            }            
+            }
         }
         private void Form1_Load(object sender, EventArgs e)
         {
