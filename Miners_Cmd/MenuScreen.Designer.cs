@@ -75,6 +75,7 @@
             this.scoreButton.Size = new System.Drawing.Size(245, 93);
             this.scoreButton.TabIndex = 3;
             this.scoreButton.TabStop = false;
+            this.scoreButton.Click += new System.EventHandler(this.scoreButton_Click);
             // 
             // quitButton
             // 

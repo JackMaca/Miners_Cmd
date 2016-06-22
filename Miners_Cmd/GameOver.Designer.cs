@@ -40,6 +40,9 @@
             this.adamantiteCount = new System.Windows.Forms.Label();
             this.crystalCount = new System.Windows.Forms.Label();
             this.diamondCount = new System.Windows.Forms.Label();
+            this.nameBox = new System.Windows.Forms.TextBox();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.savedLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.quitButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backButton)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +53,7 @@
             this.quitButton.BackgroundImage = global::Miners_Cmd.Properties.Resources.quitButton;
             this.quitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.quitButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.quitButton.Location = new System.Drawing.Point(751, 593);
+            this.quitButton.Location = new System.Drawing.Point(751, 620);
             this.quitButton.Name = "quitButton";
             this.quitButton.Size = new System.Drawing.Size(301, 107);
             this.quitButton.TabIndex = 0;
@@ -63,7 +66,7 @@
             this.backButton.BackgroundImage = global::Miners_Cmd.Properties.Resources.backButton;
             this.backButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.backButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.backButton.Location = new System.Drawing.Point(319, 593);
+            this.backButton.Location = new System.Drawing.Point(319, 620);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(301, 107);
             this.backButton.TabIndex = 1;
@@ -190,12 +193,51 @@
             this.diamondCount.TabIndex = 11;
             this.diamondCount.Text = "0";
             // 
+            // nameBox
+            // 
+            this.nameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameBox.Location = new System.Drawing.Point(443, 384);
+            this.nameBox.Name = "nameBox";
+            this.nameBox.Size = new System.Drawing.Size(265, 44);
+            this.nameBox.TabIndex = 12;
+            this.nameBox.Text = "Insert Name";
+            // 
+            // saveButton
+            // 
+            this.saveButton.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.saveButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(727, 374);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(123, 66);
+            this.saveButton.TabIndex = 13;
+            this.saveButton.Text = "Save Score";
+            this.saveButton.UseVisualStyleBackColor = false;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // savedLabel
+            // 
+            this.savedLabel.AutoSize = true;
+            this.savedLabel.BackColor = System.Drawing.Color.Transparent;
+            this.savedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.savedLabel.ForeColor = System.Drawing.Color.White;
+            this.savedLabel.Location = new System.Drawing.Point(719, 384);
+            this.savedLabel.Name = "savedLabel";
+            this.savedLabel.Size = new System.Drawing.Size(168, 46);
+            this.savedLabel.TabIndex = 14;
+            this.savedLabel.Text = "SAVED!";
+            this.savedLabel.Visible = false;
+            // 
             // GameOver
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Miners_Cmd.Properties.Resources.GameOverBG1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.savedLabel);
+            this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.nameBox);
             this.Controls.Add(this.diamondCount);
             this.Controls.Add(this.crystalCount);
             this.Controls.Add(this.adamantiteCount);
@@ -231,5 +273,8 @@
         private System.Windows.Forms.Label adamantiteCount;
         private System.Windows.Forms.Label crystalCount;
         private System.Windows.Forms.Label diamondCount;
+        private System.Windows.Forms.TextBox nameBox;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Label savedLabel;
     }
 }

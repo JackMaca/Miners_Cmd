@@ -1,4 +1,8 @@
-﻿using System;
+﻿/// Miner's Command
+/// Jack MacAlpine
+/// ICS4U
+/// Mr. T
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

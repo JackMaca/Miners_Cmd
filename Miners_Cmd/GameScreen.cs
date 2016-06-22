@@ -91,6 +91,7 @@ namespace Miners_Cmd
         WindowsMediaPlayer cannonPlayer;
         WindowsMediaPlayer dryPlayer;
         WindowsMediaPlayer hpDown;
+        WindowsMediaPlayer oreBreak;
 
         public GameScreen()
         {
@@ -151,10 +152,6 @@ namespace Miners_Cmd
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            #region sounds
-
-           
-            #endregion
 
             //display score
             scoreLabel.Text = score.ToString();
@@ -205,7 +202,7 @@ namespace Miners_Cmd
                     }
                     else
                     {
-                        //cannon click
+                        //cannon clicks if not allowed to shoot.
                         dryPlayer = new WindowsMediaPlayer();
                         dryPlayer.URL = "dryFire.mp3";
                     }                    
@@ -508,7 +505,7 @@ namespace Miners_Cmd
 
                         //health lost sound
                         hpDown = new WindowsMediaPlayer();
-                        hpDown.URL = "cannonSound.mp3";
+                        hpDown.URL = "hpDown.mp3";
                     }
                     else if (o.oreType >= 8)
                     {
@@ -545,7 +542,10 @@ namespace Miners_Cmd
                         bullets.RemoveAt(Convert.ToInt16(bullets.IndexOf(bl)));
                         //if ore will die from this hit
                         if (o.health <= 1)
-                        {                           
+                        {
+                            //destroyed ore sound
+                            oreBreak = new WindowsMediaPlayer();
+                            oreBreak.URL = "oreBreak.mp3";
                             #region oreScores
                             //different scores based on ore type
                             if (o.oreType == 0)
@@ -655,7 +655,7 @@ namespace Miners_Cmd
                             }
                             #endregion                                   
                             oreRemove = true;
-                            break;
+                            break;                            
                         }
                         //if ore has more than 1 hp left
                         else
