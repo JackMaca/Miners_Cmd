@@ -529,6 +529,7 @@ namespace Miners_Cmd
                 buffTimer.Enabled = false;
                 buffTime = 0;
                 activeEffectBox.Visible = false;
+                activeTimer.Text = "0 / 500";
             }
             //COLLISION between bullets and ores
             foreach (Ore o in ores)
