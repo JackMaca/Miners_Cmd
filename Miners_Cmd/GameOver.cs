@@ -79,6 +79,7 @@ namespace Miners_Cmd
             MenuScreen ms = new MenuScreen();
             f.Controls.Add(ms);
             f.Controls.Remove(this);
+            Form1.GameScreenBreak = true;
             ms.Location = new Point((this.Width - ms.Width) / 2, (this.Height - ms.Height) / 2);
         }
 
@@ -93,7 +94,7 @@ namespace Miners_Cmd
             XmlNode parent;
             parent = doc.DocumentElement;
 
-            int Player = 1;           
+            int Player = 1;
             //check each child of the parent element
             foreach (XmlNode child in parent.ChildNodes)
             {
@@ -105,13 +106,13 @@ namespace Miners_Cmd
                         {
                             switch (Player)
                             {
-                                case 1:                                    
+                                case 1:
                                     name1 = grandChild.Value;
                                     break;
-                                case 2:                                   
+                                case 2:
                                     name2 = grandChild.Value;
                                     break;
-                                case 3:                                    
+                                case 3:
                                     name3 = grandChild.Value;
                                     break;
                                 default:
@@ -158,23 +159,25 @@ namespace Miners_Cmd
                 writer.WriteElementString("name", nameBox.Text);
                 writer.WriteElementString("score", GameScreen.score.ToString());
 
-                //End "Info" element
-                writer.WriteEndElement();
+                //this code SHOULD save the other top 2 scores aswell as the new highscore.
 
-                //Start "Info" element
-                writer.WriteStartElement("Info");
+                ////End "Info" element
+                //writer.WriteEndElement();
 
-                writer.WriteElementString("name", name1.ToString());
-                writer.WriteElementString("score", score1.ToString());
+                ////Start "Info" element
+                //writer.WriteStartElement("Info");
 
-                // end the "Info" element
-                writer.WriteEndElement();
+                //writer.WriteElementString("name", name1.ToString());
+                //writer.WriteElementString("score", score1.ToString());
 
-                //Start "Info" element
-                writer.WriteStartElement("Info");
+                //// end the "Info" element
+                //writer.WriteEndElement();
 
-                writer.WriteElementString("name", name2.ToString());
-                writer.WriteElementString("score", score2.ToString());
+                ////Start "Info" element
+                //writer.WriteStartElement("Info");
+
+                //writer.WriteElementString("name", name2.ToString());
+                //writer.WriteElementString("score", score2.ToString());
 
                 // end the "Info" element
                 writer.WriteEndElement();
@@ -185,10 +188,14 @@ namespace Miners_Cmd
                 //Write the XML to file and close the writer
                 writer.Close();
 
+                //save and close the document
+                doc.Save("Highscores.xml");
                 savedLabel.Text = "SAVED!";
             }
             else if (GameScreen.score >= Convert.ToInt16(score2) && GameScreen.score <= Convert.ToInt16(score1))
             {
+                //this code should save the other top 2 scores aswell as the new highscore.
+
                 //only save scores if they are higher than any of the top 3
                 XmlTextWriter writer = new XmlTextWriter("Highscores.xml", null);
 
@@ -228,10 +235,14 @@ namespace Miners_Cmd
                 //Write the XML to file and close the writer
                 writer.Close();
 
+                //save and close the document
+                doc.Save("Highscores.xml");
                 savedLabel.Text = "SAVED!";
             }
             else if (GameScreen.score >= Convert.ToInt16(score3) && GameScreen.score <= Convert.ToInt16(score2))
             {
+                //this code should save the other top 2 scores aswell as the new highscore.
+
                 //only save scores if they are higher than any of the top 3
                 XmlTextWriter writer = new XmlTextWriter("Highscores.xml", null);
 
@@ -251,7 +262,7 @@ namespace Miners_Cmd
                 writer.WriteStartElement("Info");
 
                 writer.WriteElementString("name", name2.ToString());
-                writer.WriteElementString("score",score2.ToString());
+                writer.WriteElementString("score", score2.ToString());
 
                 // end the "Info" element
                 writer.WriteEndElement();
@@ -271,6 +282,8 @@ namespace Miners_Cmd
                 //Write the XML to file and close the writer
                 writer.Close();
 
+                //save and close the document
+                doc.Save("Highscores.xml");
                 savedLabel.Text = "SAVED!";
             }
             else if (GameScreen.score < Convert.ToInt16(score3))
@@ -314,6 +327,9 @@ namespace Miners_Cmd
 
                 //Write the XML to file and close the writer
                 writer.Close();
+
+                //save and close the document
+                doc.Save("Highscores.xml");
             }
             #endregion
             //confirm save button was clicked

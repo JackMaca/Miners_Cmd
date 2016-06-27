@@ -41,7 +41,9 @@
             // score1
             // 
             this.score1.AutoSize = true;
+            this.score1.BackColor = System.Drawing.Color.Transparent;
             this.score1.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.score1.ForeColor = System.Drawing.Color.White;
             this.score1.Location = new System.Drawing.Point(461, 323);
             this.score1.Name = "score1";
             this.score1.Size = new System.Drawing.Size(323, 91);
@@ -51,7 +53,9 @@
             // score2
             // 
             this.score2.AutoSize = true;
+            this.score2.BackColor = System.Drawing.Color.Transparent;
             this.score2.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.score2.ForeColor = System.Drawing.Color.White;
             this.score2.Location = new System.Drawing.Point(461, 478);
             this.score2.Name = "score2";
             this.score2.Size = new System.Drawing.Size(323, 91);
@@ -61,7 +65,9 @@
             // score3
             // 
             this.score3.AutoSize = true;
+            this.score3.BackColor = System.Drawing.Color.Transparent;
             this.score3.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.score3.ForeColor = System.Drawing.Color.White;
             this.score3.Location = new System.Drawing.Point(461, 628);
             this.score3.Name = "score3";
             this.score3.Size = new System.Drawing.Size(323, 91);
@@ -71,8 +77,10 @@
             // name1
             // 
             this.name1.AutoSize = true;
+            this.name1.BackColor = System.Drawing.Color.Transparent;
             this.name1.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.name1.Location = new System.Drawing.Point(1005, 323);
+            this.name1.ForeColor = System.Drawing.Color.White;
+            this.name1.Location = new System.Drawing.Point(950, 323);
             this.name1.Name = "name1";
             this.name1.Size = new System.Drawing.Size(270, 91);
             this.name1.TabIndex = 3;
@@ -81,8 +89,10 @@
             // name2
             // 
             this.name2.AutoSize = true;
+            this.name2.BackColor = System.Drawing.Color.Transparent;
             this.name2.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.name2.Location = new System.Drawing.Point(1005, 478);
+            this.name2.ForeColor = System.Drawing.Color.White;
+            this.name2.Location = new System.Drawing.Point(950, 478);
             this.name2.Name = "name2";
             this.name2.Size = new System.Drawing.Size(270, 91);
             this.name2.TabIndex = 4;
@@ -91,8 +101,10 @@
             // name3
             // 
             this.name3.AutoSize = true;
+            this.name3.BackColor = System.Drawing.Color.Transparent;
             this.name3.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.name3.Location = new System.Drawing.Point(1005, 628);
+            this.name3.ForeColor = System.Drawing.Color.White;
+            this.name3.Location = new System.Drawing.Point(950, 628);
             this.name3.Name = "name3";
             this.name3.Size = new System.Drawing.Size(270, 91);
             this.name3.TabIndex = 5;
@@ -103,6 +115,7 @@
             this.backButton.BackColor = System.Drawing.Color.Transparent;
             this.backButton.BackgroundImage = global::Miners_Cmd.Properties.Resources.backButton;
             this.backButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.backButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.backButton.Location = new System.Drawing.Point(3, 3);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(232, 80);

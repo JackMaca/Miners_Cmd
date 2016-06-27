@@ -26,13 +26,52 @@ namespace Miners_Cmd
             XmlNode parent;
             parent = doc.DocumentElement;
 
+            int Player = 1;
             //check each child of the parent element
             foreach (XmlNode child in parent.ChildNodes)
             {
                 if (child.Name == "Info")
                 {
-                    name1.Text = child.Attributes["name"].Value;
-                    score1.Text = child.Attributes["score"].Value;
+                    foreach (XmlNode grandChild in child.ChildNodes)
+                    {
+                        if (grandChild.Name == "name")
+                        {
+                            switch (Player)
+                            {
+                                case 1:
+                                    name1.Text = grandChild.Value;
+                                    break;
+                                case 2:
+                                    name2.Text = grandChild.Value;
+                                    break;
+                                case 3:
+                                    name3.Text = grandChild.Value;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (grandChild.Name == "score")
+                        {
+                            switch (Player)
+                            {
+                                case 1:
+                                    score1.Text = grandChild.Value;
+                                    Player++;
+                                    break;
+                                case 2:
+                                    score2.Text = grandChild.Value;
+                                    Player++;
+                                    break;
+                                case 3:
+                                    score3.Text = grandChild.Value;
+                                    Player++;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
                 }
             }
         }

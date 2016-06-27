@@ -96,6 +96,19 @@ namespace Miners_Cmd
         public GameScreen()
         {
             InitializeComponent();
+
+            //reset values
+            score = 0;
+            IrockScore = 0;
+            IironScore = 0;
+            IgoldScore = 0;
+            ImythrilScore = 0;
+            IplatinumScore = 0;
+            IadamantiteScore = 0;
+            IcrystalScore = 0;
+            IdiamondScore = 0;
+            buffTime = 0;
+            activeEffectBox.BackgroundImage = null;
             this.DoubleBuffered = true;
         }
         
@@ -529,7 +542,18 @@ namespace Miners_Cmd
                 buffTimer.Enabled = false;
                 buffTime = 0;
                 activeEffectBox.Visible = false;
-                activeTimer.Text = "0 / 500";
+                activeTimer.Text = "0/500";
+            }
+            ///Due to odd occurrence where timer passes 500 upon receiving multiple buffs in quick
+            ///succession; when the label reaches 500 / 500, it will also reset
+            if (activeTimer.Text == "500/500")
+            {
+                diamondBuff = false;
+                dmg = 1;
+                p.speed = 10;
+                buffTime = 0;
+                activeTimer.Text = "0/500";
+                buffTimer.Enabled = false;
             }
             //COLLISION between bullets and ores
             foreach (Ore o in ores)
@@ -607,7 +631,9 @@ namespace Miners_Cmd
                                 diamondBuff = false;
                                 p.speed = 10;
 
-                                activeEffectBox.BackgroundImage = Properties.Resources.goldheart;
+                                ///gold heart is not an active effect, but in instant health increase
+                                ///so it does not have an image, but cancels other active effects.
+                                activeEffectBox.BackgroundImage = null;
                                 activeEffectBox.Visible = true;
                             }
                             else if (o.oreType == 9)
@@ -779,6 +805,11 @@ namespace Miners_Cmd
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            if (Form1.GameScreenBreak == true)
+            {
+                Form f = this.FindForm();
+                f.Controls.Remove(this);
+            }
             //draw player
             DoubleBuffered = true;
             e.Graphics.DrawImage(player[fireMode], p.x, p.y, 64, 75);

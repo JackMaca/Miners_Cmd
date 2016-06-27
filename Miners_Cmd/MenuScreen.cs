@@ -49,6 +49,9 @@ namespace Miners_Cmd
         //open game screen
         private void playButton_Click(object sender, EventArgs e)
         {
+            //disable boolean to allow another game to start, after a game has already been played this session
+            Form1.GameScreenBreak = false;
+
             //click sound for buttons
             WindowsMediaPlayer click = new WindowsMediaPlayer();
             click.URL = "click.wav";

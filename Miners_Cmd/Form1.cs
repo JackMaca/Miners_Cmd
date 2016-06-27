@@ -19,6 +19,8 @@ namespace Miners_Cmd
 {
     public partial class Form1 : Form
     {
+        public static bool GameScreenBreak = false;
+
         //new thread for background music
         Thread backMusicThread;
         WindowsMediaPlayer mp3Player;
