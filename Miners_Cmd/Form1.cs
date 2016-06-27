@@ -2,6 +2,10 @@
 /// Jack MacAlpine
 /// ICS4U
 /// Mr. T
+/// 
+/// Arcade Style Game where objects fall from the top of the screen and reward points and powerups.
+/// Games are infinite depending on how long the player can last with the increasing rate of objects
+/// falling. Players must last as long as possible and score as many points as possible.
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
